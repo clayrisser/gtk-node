@@ -1,0 +1,31 @@
+{
+    "name": "node-gtk3",
+    "version": "0.0.1",
+    "description": "Node bindings for Gtk3",
+    "main": "index.js",
+    "repository": "https://jamrizzi.com",
+    "author": "Jam Risser <jam@jamrizzi.com>",
+    "license": "MIT",
+    "dependencies": {
+        "ffi": "^2.2.0",
+        "json-loader": "^0.5.4",
+        "path": "^0.12.7"
+    },
+    "scripts": {
+        "build": "node ./node_modules/babel-cli/bin/babel-node ./node_modules/webpack/bin/webpack"
+    },
+    "devDependencies": {
+        "babel-cli": "^6.24.1",
+        "babel-core": "^6.24.1",
+        "babel-loader": "^7.0.0",
+        "babel-preset-es2015": "^6.24.1",
+        "babel-preset-node5": "^12.0.1",
+        "node-loader": "^0.6.0",
+        "webpack": "^2.6.1"
+    },
+    "babel": {
+        "presets": [
+            "es2015"
+        ]
+    }
+}
