@@ -1,7 +1,7 @@
 import ffi from 'ffi';
 
 const settings = {
-  title: 'My Awesome App',
+  title: 'Node Gtk3',
   height: 200,
   width: 200
 };
