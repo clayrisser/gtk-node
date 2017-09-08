@@ -1,7 +1,8 @@
 #ifndef GTK_APP_HEADER
 #define GTK_APP_HEADER
-GtkApplication * new_app(char *);
-int run_app(GtkApplication *);
-typedef void on_activate_callback(gpointer *);
+GtkApplication *create(char*);
+int run(GtkApplication*);
+void show(GtkWidget*);
+typedef void on_activate_callback(gpointer*, GtkWidget*);
 void register_on_activate(on_activate_callback);
 #endif

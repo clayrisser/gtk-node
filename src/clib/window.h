@@ -1,4 +1,4 @@
-#ifndef WINDOW_HEADER
-#define WINDOW_HEADER
-void render(GtkApplication *, gpointer *, char *, int, int);
+#ifndef GTK_WINDOW_HEADER
+#define GTK_WINDOW_HEADER
+GtkWidget *create();
 #endif
