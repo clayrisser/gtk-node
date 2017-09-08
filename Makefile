@@ -8,22 +8,23 @@ else
 	SOEXT := so
 endif
 
-TARGETS := $(shell find ./src/clib -name '*.c' -print | sed -e 's/\.c/\.$(SOEXT)/; s/^\.\/src/.\/lib/')
+TARGETS := $(shell find ./src/ -name '*.c' -print | sed -e 's/\.c/\.$(SOEXT)/; s/^\.\/src/.\/lib/')
 
 .PHONY: all
 all: clean build
 
 .PHONY: build
-build: lib/bindings $(TARGETS)
+build: lib $(TARGETS)
 	@echo ::: Built :::
 
-lib/bindings:
-	@echo Building: lib/bindings
+lib:
+	@echo Building: lib
 	@npm run build
 
-lib/clib/%.$(SOEXT): src/clib/%.c src/clib/%.h
+lib/%.$(SOEXT): src/%.c src/%.h
 	@echo Building: $@
-	@mkdir -p $(CWD)/lib/clib/
+	$(eval LIBPATH := $(shell echo $@ | sed -e 's/\/[^\//]*\.$(SOEXT)//g'))
+	@mkdir -p $(LIBPATH)
 	@$(CC) $< -o $@ $(CFLAGS)
 
 .PHONY: demo

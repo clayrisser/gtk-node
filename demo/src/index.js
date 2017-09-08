@@ -1,15 +1,12 @@
-import App, { Button } from '../../lib';
+import { App, Button } from '../../lib';
 
 const app = new App({
-  title: 'Node Gtk3'
+  title: 'Node Gtk'
 });
-
-app.run().then((app) => {
-  console.log('yay');
+app.init((window) => {
   const button = new Button({
-    parent: app.window,
-    name: 'Hello, world'
+    name: 'Button 1'
   });
-}).catch((err) => {
-  console.error(err);
+  button.attach(window);
+  app.render();
 });

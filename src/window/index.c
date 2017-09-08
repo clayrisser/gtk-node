@@ -1,6 +1,6 @@
 #include <gtk/gtk.h>
 #include <stdio.h>
-#include "window.h"
+#include "index.h"
 
 GtkWidget *create() {
   GtkWidget *window;
