@@ -55,5 +55,9 @@ make demo
 
 ## Changelog
 
+0.0.2 (2017-09-06)
+* Added MacOS support
+* Refactored build system with [nwb](https://github.com/insin/nwb)
+
 0.0.1 (2017-06-07)
 * Initial release
