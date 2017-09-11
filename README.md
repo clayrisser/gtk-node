@@ -6,7 +6,7 @@ Node bindings for Gtk3
 
 Existing bindings are either abandoned or require custom runtime environments. This is an attempt to create support gtk bindings for the official node engine. This project is the foundation for [react-gtk](https://github.com/jamrizzi/react-gtk). Contributors are wanted and welcomed.
 
-This project is using [ffi](https://github.com/node-ffi/node-ffi) to bind node to the gtk C libraries.
+This project is using [ffi](https://github.com/node-ffi/node-ffi) to bind node to the gtk C libraries. Bindings will follow the same api implementatin as [GJS](https://wiki.gnome.org/Projects/Gjs).
 
 Please &#9733; this repo if you found it useful &#9733; &#9733; &#9733;
 
