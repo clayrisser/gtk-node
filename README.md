@@ -1,4 +1,4 @@
-# node-gtk3
+# node-gtk3 _Pre Release_
 
 [![Gitter](https://img.shields.io/gitter/room/react-gtk/lobby.svg?style=flat-square)](https://gitter.im/react-gtk)
 
