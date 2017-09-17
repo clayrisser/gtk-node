@@ -6,12 +6,16 @@
 typedef struct {
   char *title;
   char *namespace;
+  int width;
+  int height;
 } Settings;
 Settings settings = {"Some Title", "org.gtk.example"};
 
-GtkApplication *create(char *title, char *namespace) {
+GtkApplication *create(char *title, char *namespace, int width, int height) {
   settings.title = title;
   settings.namespace = namespace;
+  settings.width = width;
+  settings.height = height;
   GtkApplication *app;
   app = gtk_application_new(namespace, G_APPLICATION_FLAGS_NONE);
   return app;
@@ -26,6 +30,7 @@ void activate(GtkApplication *app, gpointer user_data) {
   GtkWidget *window;
   window = gtk_application_window_new(app);
   gtk_window_set_title(GTK_WINDOW(window), settings.title);
+  gtk_window_set_default_size(GTK_WINDOW(window), settings.width, settings.height);
   on_activate(window);
 }
 
