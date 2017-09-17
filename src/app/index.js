@@ -22,20 +22,25 @@ export default class App {
     this.namespace = namespace || 'org.gtk.example';
     this.window = null;
     app.register_on_activate(ffi.Callback('void', [type.GtkWidgetPtr], (window) => {
-      this.window = window;
+      this.window = new Window({ pointer: window });
       this.onActivate(this.window);
     }));
     this.pointer = app.create(this.title, this.namespace);
   }
 
-  init(cb) {
-    this.onActivate = cb;
-    app.init(this.pointer);
+  init() {
+    return new Promise((resolve, reject) => {
+      this.onActivate = resolve;
+      app.init.async(this.pointer, (err, status) => {
+        if (status !== 0) {
+          console.error(new Error('Program initialized with error'));
+        }
+        process.exit(status);
+      });
+    });
   }
 
-  render(window) {
-    if (!window) window = this.window;
-    if (window.pointer) window = window.pointer;
-    app.render(window);
+  render() {
+    return app.render(this.window.pointer);
   }
 }

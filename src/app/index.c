@@ -1,5 +1,6 @@
 #include <gtk/gtk.h>
 #include <stdio.h>
+#include <unistd.h>
 #include "index.h"
 
 typedef struct {
@@ -25,7 +26,6 @@ void activate(GtkApplication *app, gpointer user_data) {
   GtkWidget *window;
   window = gtk_application_window_new(app);
   gtk_window_set_title(GTK_WINDOW(window), settings.title);
-  printf("activated\n");
   on_activate(window);
 }
 

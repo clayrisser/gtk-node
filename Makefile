@@ -28,7 +28,7 @@ lib/%.$(SOEXT): src/%.c src/%.h
 	@$(CC) $< -o $@ $(CFLAGS)
 
 .PHONY: demo
-demo: build
+demo: clean build
 	@npm run demo
 
 .PHONY: clean
