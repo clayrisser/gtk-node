@@ -6,7 +6,7 @@ const type = {
   GtkWidgetPtr: ref.refType(ref.types.void)
 };
 
-const window = ffi.Library(path.resolve(__dirname, './index'), {
+const window = ffi.Library(path.resolve(__dirname, '../../build/Release/window'), {
   create: [type.GtkWidgetPtr, ['string']]
 });
 

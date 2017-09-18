@@ -9,7 +9,7 @@ const type = {
   on_activate_cb: ref.refType(ref.types.void)
 };
 
-const app = ffi.Library(path.resolve(__dirname, './index'), {
+const app = ffi.Library(path.resolve(__dirname, '../../build/Release/app'), {
   create: [type.GtkApplicationPtr, ['string', 'string', 'int', 'int']],
   init: ['int', [type.GtkApplicationPtr]],
   register_on_activate: ['void', [type.on_activate_cb]],

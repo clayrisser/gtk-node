@@ -7,7 +7,7 @@ const type = {
   on_click_cb: ref.refType(ref.types.void)
 };
 
-const button = ffi.Library(path.resolve(__dirname, './index'), {
+const button = ffi.Library(path.resolve(__dirname, '../../build/Release/button'), {
   create: [type.GtkWidgetPtr, ['string']],
   attach: [type.GtkWidgetPtr, [type.GtkWidgetPtr, type.GtkWidgetPtr]],
   register_on_click: ['void', [type.on_click_cb]]

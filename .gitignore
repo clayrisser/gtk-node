@@ -118,3 +118,4 @@ typings/
 # Application
 lib
 es/
+build/
