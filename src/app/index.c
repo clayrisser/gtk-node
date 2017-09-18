@@ -9,7 +9,7 @@ typedef struct {
   int width;
   int height;
 } Settings;
-Settings settings = {"Some Title", "org.gtk.example"};
+Settings settings = {"Some Title", "org.gtk.example", 200, 200};
 
 GtkApplication *create(char *title, char *namespace, int width, int height) {
   settings.title = title;
