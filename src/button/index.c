@@ -10,7 +10,6 @@ Settings settings = {"Some Button"};
 typedef struct {
   GtkWidget *button;
   GtkWidget *container;
-  gchar *test;
 } AttachPackage;
 
 GtkWidget *create(char* label) {
@@ -37,6 +36,5 @@ void attach(GtkWidget *button, GtkWidget *container) {
   AttachPackage *p_package = g_malloc(sizeof(AttachPackage));
   p_package->button = button;
   p_package->container = container;
-  p_package->test = "wow";
   gdk_threads_add_idle(attach_main, p_package);
 }
