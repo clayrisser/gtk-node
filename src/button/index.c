@@ -7,6 +7,12 @@ typedef struct {
 } Settings;
 Settings settings = {"Some Button"};
 
+typedef struct {
+  GtkWidget *button;
+  GtkWidget *container;
+  gchar *test;
+} AttachPackage;
+
 GtkWidget *create(char* label) {
   GtkWidget *button;
   button = gtk_button_new_with_label(label);
@@ -18,10 +24,19 @@ void register_on_click(void (*on_click_cb)()) {
   on_click = on_click_cb;
 }
 
-void attach(GtkWidget *button, GtkWidget *container) {
-  g_signal_connect(button, "clicked", G_CALLBACK(on_click), NULL);
+gboolean attach_main(gpointer p_package) {
+  AttachPackage package = *(AttachPackage*)p_package;
+  g_signal_connect(package.button, "clicked", G_CALLBACK(on_click), NULL);
   GtkWidget *button_box;
   button_box = gtk_button_box_new(GTK_ORIENTATION_HORIZONTAL);
-  gtk_container_add(GTK_CONTAINER(container), button_box);
-  gtk_container_add(GTK_CONTAINER(button_box), button);
+  gtk_container_add(GTK_CONTAINER(package.container), button_box);
+  gtk_container_add(GTK_CONTAINER(button_box), package.button);
+  return G_SOURCE_REMOVE;
+}
+void attach(GtkWidget *button, GtkWidget *container) {
+  AttachPackage *p_package = g_malloc(sizeof(AttachPackage));
+  p_package->button = button;
+  p_package->container = container;
+  p_package->test = "wow";
+  gdk_threads_add_idle(attach_main, p_package);
 }
