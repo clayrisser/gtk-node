@@ -1,7 +1,7 @@
 {
   "name": "node_gtk3",
-  "version": "1.0.0",
-  "description": "Describe node_gtk3 here",
+  "version": "0.0.1",
+  "description": "Node bindings for Gtk3",
   "main": "lib/index.js",
   "module": "es/index.js",
   "files": [
