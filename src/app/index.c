@@ -11,6 +11,10 @@ typedef struct {
 } Settings;
 Settings settings = {"Some Title", "org.gtk.example", 200, 200};
 
+typedef struct {
+  GtkWidget *window;
+} RenderPackage;
+
 GtkApplication *create(char *title, char *namespace, int width, int height) {
   settings.title = title;
   settings.namespace = namespace;
@@ -41,6 +45,14 @@ int init(GtkApplication *app) {
   return status;
 }
 
+gboolean render_main(gpointer p_package) {
+  RenderPackage package = *(RenderPackage*)p_package;
+  gtk_widget_show_all(package.window);
+  g_free((RenderPackage*)p_package);
+  return G_SOURCE_REMOVE;
+}
 void render(GtkWidget *window) {
-  gtk_widget_show_all(window);
+  RenderPackage *p_package = g_malloc(sizeof(RenderPackage));
+  p_package->window = window;
+  gdk_threads_add_idle(render_main, p_package);
 }
