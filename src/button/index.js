@@ -17,9 +17,11 @@ export default class Button {
   constructor({name}) {
     this.name = name || 'Some Button';
     this.pointer = button.create(this.name);
-    button.register_on_click(ffi.Callback('void', [type.GtkWidgetPtr], () => {
+    const onClickCB = ffi.Callback('void', [type.GtkWidgetPtr], () => {
       this.onClick();
-    }));
+    });
+    button.register_on_click(onClickCB);
+    process.on('exit', () => { onClickCB; });
   }
 
   onClick() {}

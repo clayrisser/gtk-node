@@ -23,10 +23,12 @@ export default class App {
     this.width = width || 200;
     this.height = height || 200;
     this.window = null;
-    app.register_on_activate(ffi.Callback('void', [type.GtkWidgetPtr], (window) => {
+    const onActivateCallback = ffi.Callback('void', [type.GtkWidgetPtr], (window) => {
       this.window = new Window({ pointer: window });
       this.onActivate(this.window);
-    }));
+    });
+    app.register_on_activate(onActivateCallback);
+    process.on('exit', () => { onActivateCallback; });
     this.pointer = app.create(this.title, this.namespace, this.width, this.height);
   }
 
