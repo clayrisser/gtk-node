@@ -30,6 +30,8 @@ gboolean attach_main(gpointer p_package) {
   button_box = gtk_button_box_new(GTK_ORIENTATION_HORIZONTAL);
   gtk_container_add(GTK_CONTAINER(package.container), button_box);
   gtk_container_add(GTK_CONTAINER(button_box), package.button);
+  gtk_widget_show_all(button_box);
+  g_free((AttachPackage*)p_package);
   return G_SOURCE_REMOVE;
 }
 void attach(GtkWidget *button, GtkWidget *container) {
