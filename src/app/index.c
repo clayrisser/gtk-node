@@ -1,6 +1,5 @@
 #include <gtk/gtk.h>
 #include <stdio.h>
-#include <unistd.h>
 #include "index.h"
 
 typedef struct {
