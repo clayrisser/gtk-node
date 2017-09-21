@@ -9,7 +9,10 @@ const app = new App({
 
 app.init().then((window) => {
   const button = new Button({
-    label: 'Button 1'
+    label: 'Button 1',
+    opacity: .1,
+    height: 100,
+    width: 50
   });
   button.onClicked = () => {
     console.log('Button was clicked');

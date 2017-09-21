@@ -14,7 +14,7 @@ const type = {
 };
 
 const button = ffi.Library(path.resolve(__dirname, './index'), {
-  create: [type.GtkWidgetPtr, ['string', 'bool']],
+  create: [type.GtkWidgetPtr, ['string', 'bool', 'double', 'int', 'int']],
   attach: [type.GtkWidgetPtr, [type.GtkWidgetPtr, type.GtkWidgetPtr]],
   register_on_activate: ['void', [type.on_activate_cb]],
   register_on_clicked: ['void', [type.on_clicked_cb]],
@@ -25,10 +25,13 @@ const button = ffi.Library(path.resolve(__dirname, './index'), {
 });
 
 export default class Button {
-  constructor({label, mnemonic}) {
+  constructor({label, mnemonic, opacity, height, width}) {
     this.label = label || 'Some Button';
     this.mnemonic = !!mnemonic;
-    this.pointer = button.create(this.label, this.mnemonic);
+    this.opacity = opacity || 1;
+    this.height = height || -1;
+    this.width = width || -1;
+    this.pointer = button.create(this.label, this.mnemonic, this.opacity, this.height, this.width);
     this.registerCallback('activate');
     this.registerCallback('clicked');
     this.registerCallback('enter');

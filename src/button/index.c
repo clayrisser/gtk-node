@@ -7,13 +7,15 @@ typedef struct {
   GtkWidget *container;
 } AttachPackage;
 
-GtkWidget *create(char* label, gboolean mnemonic) {
+GtkWidget *create(char* label, gboolean mnemonic, gdouble opacity, gint height, gint width) {
   GtkWidget *button;
   if (mnemonic) {
     button = gtk_button_new_with_mnemonic(label);
   } else {
     button = gtk_button_new_with_label(label);
   }
+  gtk_widget_set_opacity(button, opacity);
+  gtk_widget_set_size_request(button, width, height);
   return button;
 }
 
