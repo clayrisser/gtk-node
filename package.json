@@ -10,7 +10,8 @@
     "umd"
   ],
   "scripts": {
-    "build": "node ./node_modules/nwb/lib/bin/nwb build-web-module",
+    "build": "node ./node_modules/nwb/lib/bin/nwb build-web-module && npm run prepublish",
+    "prepublish": "node ./node_modules/node-gyp/bin/node-gyp clean configure build",
     "clean": "node ./node_modules/nwb/lib/bin/nwb  clean-module",
     "demo": "node ./node_modules/babel-cli/bin/babel-node ./demo/src/index.js",
     "test": "node ./node_modules/nwb/lib/bin/nwb  test",
@@ -19,7 +20,8 @@
     "prepublish": "make build"
   },
   "dependencies": {
-    "ffi": "^2.2.0"
+    "ffi": "^2.2.0",
+    "node-gyp": "git+https://github.com/jamrizzi/node-gyp.git"
   },
   "devDependencies": {
     "nwb": "^0.18.10"
