@@ -4,7 +4,10 @@
       "target_name": "app",
       "type": "shared_library",
       "cflags": [
-        "-Wall -g -shared -fpic `pkg-config --cflags --libs gtk+-3.0`"
+        "`pkg-config --cflags --libs gtk+-3.0`"
+      ],
+      "ldflags": [
+        "`pkg-config --cflags --libs gtk+-3.0`"
       ],
       "sources": [
         "./src/app/index.c"
@@ -15,7 +18,10 @@
       "target_name": "button",
       "type": "shared_library",
       "cflags": [
-        "-Wall -g -shared -fpic `pkg-config --cflags --libs gtk+-3.0`"
+        "`pkg-config --cflags --libs gtk+-3.0`"
+      ],
+      "ldflags": [
+        "`pkg-config --cflags --libs gtk+-3.0`"
       ],
       "sources": [
         "./src/button/index.c"
@@ -26,7 +32,10 @@
       "target_name": "window",
       "type": "shared_library",
       "cflags": [
-        "-Wall -g -shared -fpic `pkg-config --cflags --libs gtk+-3.0`"
+        "`pkg-config --cflags --libs gtk+-3.0`"
+      ],
+      "ldflags": [
+        "`pkg-config --cflags --libs gtk+-3.0`"
       ],
       "sources": [
         "./src/window/index.c"
