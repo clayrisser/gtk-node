@@ -1,13 +1,16 @@
 {
   "name": "node-gtk3",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Node bindings for Gtk3",
   "main": "lib/index.js",
   "module": "es/index.js",
   "files": [
     "es",
     "lib",
-    "umd"
+    "umd",
+    "src/**/*.c",
+    "src/**/*.h",
+    "binding.gyp"
   ],
   "scripts": {
     "build": "node ./node_modules/nwb/lib/bin/nwb build-web-module && node ./node_modules/node-gyp/bin/node-gyp clean configure build",
