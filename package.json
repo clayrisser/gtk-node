@@ -1,6 +1,6 @@
 {
   "name": "node-gtk3",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "description": "Node bindings for Gtk3",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -18,11 +18,11 @@
     "test:watch": "node ./node_modules/nwb/lib/bin/nwb  test --server"
   },
   "dependencies": {
-    "ffi": "^2.2.0",
-    "node-gyp": "^3.6.2"
+    "ffi": "^2.2.0"
   },
   "devDependencies": {
-    "nwb": "^0.18.10"
+    "nwb": "^0.18.10",
+    "node-gyp": "^3.6.2"
   },
   "babel": {
     "presets": [
