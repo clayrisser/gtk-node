@@ -10,18 +10,16 @@
     "umd"
   ],
   "scripts": {
-    "build": "node ./node_modules/nwb/lib/bin/nwb build-web-module && npm run prepublish",
-    "prepublish": "node ./node_modules/node-gyp/bin/node-gyp clean configure build",
-    "clean": "node ./node_modules/nwb/lib/bin/nwb  clean-module",
-    "demo": "node ./node_modules/babel-cli/bin/babel-node ./demo/src/index.js",
-    "test": "node ./node_modules/nwb/lib/bin/nwb  test",
+    "build": "node ./node_modules/nwb/lib/bin/nwb build-web-module && node ./node_modules/node-gyp/bin/node-gyp clean configure build",
+    "clean": "node ./node_modules/nwb/lib/bin/nwb clean && rm -rf ./build",
+    "demo": "npm run build && node ./node_modules/babel-cli/bin/babel-node ./demo/src/index.js",
+    "test": "node ./node_modules/nwb/lib/bin/nwb test",
     "test:coverage": "node ./node_modules/nwb/lib/bin/nwb  test --coverage",
-    "test:watch": "node ./node_modules/nwb/lib/bin/nwb  test --server",
-    "prepublish": "make build"
+    "test:watch": "node ./node_modules/nwb/lib/bin/nwb  test --server"
   },
   "dependencies": {
     "ffi": "^2.2.0",
-    "node-gyp": "git+https://github.com/jamrizzi/node-gyp.git"
+    "node-gyp": "^3.6.2"
   },
   "devDependencies": {
     "nwb": "^0.18.10"
