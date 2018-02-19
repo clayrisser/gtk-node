@@ -2,9 +2,9 @@
 
 [![Gitter](https://img.shields.io/gitter/room/react-gtk/lobby.svg?style=flat-square)](https://gitter.im/react-gtk)
 
-This project is depricated in favor of [https://github.com/Place1/react-native-gtk/tree/master/packages/gtk-node](https://github.com/Place1/react-native-gtk/tree/master/packages/gtk-node). You can still contact me if you would like to contribute to [https://github.com/Place1/react-native-gtk](https://github.com/Place1/react-native-gtk). We're working very hard in our free time to make this project a reality.
+This project is depricated in favor of [https://github.com/Place1/node-gir](https://github.com/Place1/node-gir). You can still contact me if you would like to contribute to [node-gir](https://github.com/Place1/node-gir). We're working very hard in our free time to make this project a reality.
 
-Node bindings for Gtk3
+> Node bindings for Gtk3
 
 Existing bindings are either abandoned or require custom runtime environments. This is an attempt to create support gtk bindings for the official node engine. This project is the foundation for [react-gtk](https://github.com/jamrizzi/react-gtk). Contributors are wanted and welcomed.
 
