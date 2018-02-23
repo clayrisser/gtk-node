@@ -23,7 +23,7 @@ Please &#9733; this repo if you found it useful &#9733; &#9733; &#9733;
 ```sh
 git clone https://github.com/jamrizzi/node-gtk3.git && cd node-gtk3
 npm install
-make demo
+npm run demo
 ```
 
 
