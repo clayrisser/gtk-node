@@ -20,7 +20,11 @@ GtkApplication *create(char *title, char *namespace, int width, int height) {
   settings.width = width;
   settings.height = height;
   GtkApplication *app;
+#if GLIB_CHECK_VERSION(2, 74, 0)
+  app = gtk_application_new(namespace, G_APPLICATION_DEFAULT_FLAGS);
+#else
   app = gtk_application_new(namespace, G_APPLICATION_FLAGS_NONE);
+#endif
   return app;
 }
 

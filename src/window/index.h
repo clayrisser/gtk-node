@@ -1,6 +1,8 @@
 #ifndef GTK_WINDOW_HEADER
 #define GTK_WINDOW_HEADER
 
-GtkWidget *create();
+#include <gtk/gtk.h>
+
+GtkWidget *create(void);
 
 #endif

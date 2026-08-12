@@ -1,6 +1,8 @@
 #ifndef GTK_BUTTON_HEADER
 #define GTK_BUTTON_HEADER
 
+#include <gtk/gtk.h>
+
 GtkWidget *create(char*, gboolean, gdouble, gint, gint);
 
 typedef void on_activate_cb();
