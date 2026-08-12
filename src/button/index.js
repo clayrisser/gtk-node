@@ -1,51 +1,35 @@
-import ffi from 'ffi';
-import path from 'path';
-import ref from 'ref';
-import _ from 'lodash';
+import koffi from 'koffi';
+import load from '../library.js';
 
-const type = {
-  GtkWidgetPtr: ref.refType(ref.types.void),
-  on_activate_cb: ref.refType(ref.types.void),
-  on_clicked_cb: ref.refType(ref.types.void),
-  on_enter_cb: ref.refType(ref.types.void),
-  on_leave_cb: ref.refType(ref.types.void),
-  on_pressed_cb: ref.refType(ref.types.void),
-  on_released_cb: ref.refType(ref.types.void)
+const signals = ['activate', 'clicked', 'enter', 'leave', 'pressed', 'released'];
+
+const OnSignal = koffi.proto('void OnSignal(void *widget)');
+
+const lib = load('button');
+const button = {
+  create: lib.func('void *create(const char *label, bool mnemonic, double opacity, int height, int width)'),
+  attach: lib.func('void *attach(void *button, void *container)'),
+  register: Object.fromEntries(signals.map((signal) => [signal, lib.func(`void register_on_${signal}(OnSignal *cb)`)])),
 };
 
-const button = ffi.Library(path.resolve(__dirname, '../../build/Release/button'), {
-  create: [type.GtkWidgetPtr, ['string', 'bool', 'double', 'int', 'int']],
-  attach: [type.GtkWidgetPtr, [type.GtkWidgetPtr, type.GtkWidgetPtr]],
-  register_on_activate: ['void', [type.on_activate_cb]],
-  register_on_clicked: ['void', [type.on_clicked_cb]],
-  register_on_enter: ['void', [type.on_enter_cb]],
-  register_on_leave: ['void', [type.on_leave_cb]],
-  register_on_pressed: ['void', [type.on_pressed_cb]],
-  register_on_released: ['void', [type.on_released_cb]]
-});
-
 export default class Button {
-  constructor({label, mnemonic, opacity, height, width}) {
-    this.label = label || 'Some Button';
-    this.mnemonic = !!mnemonic;
-    this.opacity = opacity || 1;
-    this.height = height || -1;
-    this.width = width || -1;
-    this.pointer = button.create(this.label, this.mnemonic, this.opacity, this.height, this.width);
-    this.registerCallback('activate');
-    this.registerCallback('clicked');
-    this.registerCallback('enter');
-    this.registerCallback('leave');
-    this.registerCallback('pressed');
-    this.registerCallback('released');
-  }
+  #callbacks = [];
 
-  registerCallback(name) {
-    const onActionCB = ffi.Callback('void', [type.GtkWidgetPtr], () => {
-      this[`on${_.startCase(name)}`]();
-    });
-    button[`register_on_${name}`](onActionCB);
-    process.on('exit', () => { onActionCB; });
+  constructor({ label, mnemonic, opacity, height, width } = {}) {
+    this.label = label ?? 'Some Button';
+    this.mnemonic = Boolean(mnemonic);
+    this.opacity = opacity ?? 1;
+    this.height = height ?? -1;
+    this.width = width ?? -1;
+    this.pointer = button.create(this.label, this.mnemonic, this.opacity, this.height, this.width);
+    for (const signal of signals) {
+      const handler = `on${signal[0].toUpperCase()}${signal.slice(1)}`;
+      // register_on_* stores a single global function pointer per library, so
+      // the most recently constructed Button wins for every button's signals.
+      const callback = koffi.register(() => this[handler](), koffi.pointer(OnSignal));
+      this.#callbacks.push(callback);
+      button.register[signal](callback);
+    }
   }
 
   onActivate() {}
@@ -61,7 +45,11 @@ export default class Button {
   onReleased() {}
 
   attach(container) {
-    if (container.pointer) container = container.pointer;
-    button.attach(this.pointer, container);
+    button.attach(this.pointer, container?.pointer ?? container);
+  }
+
+  destroy() {
+    for (const callback of this.#callbacks) koffi.unregister(callback);
+    this.#callbacks = [];
   }
 }

@@ -1,18 +1,12 @@
-import ffi from 'ffi';
-import path from 'path';
-import ref from 'ref';
+import load from '../library.js';
 
-const type = {
-  GtkWidgetPtr: ref.refType(ref.types.void)
+const lib = load('window');
+const window = {
+  create: lib.func('void *create()'),
 };
 
-const window = ffi.Library(path.resolve(__dirname, '../../build/Release/window'), {
-  create: [type.GtkWidgetPtr, ['string']]
-});
-
 export default class Window {
-  constructor({pointer}) {
-    this.pointer = pointer;
-    if (!pointer) this.pointer = window.create();
+  constructor({ pointer } = {}) {
+    this.pointer = pointer ?? window.create();
   }
 }
