@@ -1,0 +1,19 @@
+services:
+  gtk-node:
+    image: ${DOCKER_REGISTRY:-registry.gitlab.com/bitspur/react-gnome}/gtk-node:${DOCKER_TAG:-latest}
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+      args:
+        NODE_VERSION: ${NODE_VERSION:-26.7.0}
+        PNPM_VERSION: ${PNPM_VERSION:-10.22.0}
+    working_dir: /workspace
+    volumes:
+      - ..:/workspace
+      # A named volume keeps the container's Linux node_modules from clobbering
+      # a host install. build/ deliberately stays on the bind mount: node-gyp
+      # rebuild starts by removing that directory, which fails on a mount point.
+      - node_modules:/workspace/node_modules
+
+volumes:
+  node_modules:
