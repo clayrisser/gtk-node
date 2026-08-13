@@ -1,40 +1,44 @@
 {
   "name": "node-gtk3",
   "version": "0.0.7",
-  "description": "Node bindings for Gtk3",
-  "main": "lib/index.js",
-  "module": "es/index.js",
-  "files": [
-    "es",
-    "lib",
-    "umd",
-    "src/**/*.c",
-    "src/**/*.h",
-    "binding.gyp"
+  "description": "Node bindings for GTK3",
+  "keywords": [
+    "bindings",
+    "ffi",
+    "gnome",
+    "gtk",
+    "gtk3",
+    "koffi"
   ],
+  "homepage": "https://gitlab.com/bitspur/react-gnome/gtk-node",
+  "license": "MIT",
+  "author": "Clay Risser",
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/bitspur/react-gnome/gtk-node.git"
+  },
+  "files": [
+    "binding.gyp",
+    "src"
+  ],
+  "type": "module",
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js"
+  },
   "scripts": {
-    "build": "node ./node_modules/nwb/lib/bin/nwb build-web-module && node ./node_modules/node-gyp/bin/node-gyp clean configure build",
-    "clean": "node ./node_modules/nwb/lib/bin/nwb clean && rm -rf ./build",
-    "demo": "npm run build && node ./node_modules/babel-cli/bin/babel-node ./demo/src/index.js",
-    "test": "node ./node_modules/nwb/lib/bin/nwb test",
-    "test:coverage": "node ./node_modules/nwb/lib/bin/nwb  test --coverage",
-    "test:watch": "node ./node_modules/nwb/lib/bin/nwb  test --server"
+    "install": "true"
   },
   "dependencies": {
-    "ffi": "^2.2.0"
+    "koffi": "^3.1.4"
   },
   "devDependencies": {
-    "nwb": "^0.18.10",
-    "node-gyp": "^3.6.2"
+    "node-gyp": "^13.0.1",
+    "oxfmt": "^0.63.0",
+    "oxlint": "^1.78.0"
   },
-  "babel": {
-    "presets": [
-      "es2015",
-      "stage-2"
-    ]
+  "engines": {
+    "node": ">=20"
   },
-  "author": "",
-  "homepage": "",
-  "license": "MIT",
-  "repository": ""
+  "packageManager": "pnpm@10.22.0"
 }
